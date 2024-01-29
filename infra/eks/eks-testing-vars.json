@@ -1,0 +1,7 @@
+{
+    "cluster_names": [
+        "banyandb-stress-testing"
+    ],
+    "region": "ap-northeast-3",
+    "eks_k8s_version": "1.28"
+}
