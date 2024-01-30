@@ -1,0 +1,6 @@
+{
+    "env_name": "testing",
+    "region": "ap-northeast-3",
+    "eks_k8s_version": "1.28",
+    "es_version": "OpenSearch_2.11"
+}
