@@ -1,6 +1,7 @@
 {
-    "env_name": "testing",
+    "cluster_names": [
+        "banyandb-stress-testing"
+    ],
     "region": "ap-northeast-3",
-    "eks_k8s_version": "1.28",
-    "es_version": "OpenSearch_2.11"
+    "eks_k8s_version": "1.28"
 }

@@ -1,15 +1,6 @@
-variable "env_name" {
-  type        = string
-  description = "A name to give to this env. It will be used to name resources."
 
-  validation {
-    condition     = can(regex("^[a-zA-Z][a-zA-Z0-9]*$", var.env_name))
-    error_message = "The 'env_name' variable must start with a letter and can only contain alphanumeric characters."
-  }
-}
-
-variable "es_version" {
-  type = string
+variable "cluster_names" {
+  type = list(string)
 }
 
 variable "region" {
@@ -51,3 +42,29 @@ variable "kube_config_output_dir" {
   type    = string
   default = "~/.kube"
 }
+
+# Elasticsearch
+variable "es_version" {
+  type    = string
+  default = "OpenSearch_2.11"
+}
+
+variable "es_username" {
+  type    = string
+  default = "not-elastic"
+}
+
+variable "es_password" {
+  type    = string
+  default = "N0t-3l4st!c"
+}
+
+# Istio
+
+variable "enable_istio" {
+  description = "Enable or disable the istio module"
+  type        = bool
+  default     = true
+}
+
+# OAP
