@@ -1,8 +1,4 @@
 
-variable "kube_config_path" {
-  type = string
-}
-
 variable "storage_type" {
   type    = string
   default = "banyandb"

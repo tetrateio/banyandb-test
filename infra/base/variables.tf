@@ -1,11 +1,13 @@
 
-variable "cluster_names" {
-  type = list(string)
-}
-
 variable "region" {
   type = string
 }
+
+variable "cluster_names" {
+  type    = list(string)
+  default = ["central"]
+}
+
 
 # VPC
 variable "vpc_name" {
@@ -44,6 +46,10 @@ variable "kube_config_output_dir" {
 }
 
 # Elasticsearch
+variable "es_enabled" {
+  type = bool
+}
+
 variable "es_version" {
   type    = string
   default = "OpenSearch_2.11"
@@ -59,12 +65,12 @@ variable "es_password" {
   default = "N0t-3l4st!c"
 }
 
-# Istio
-
-variable "enable_istio" {
-  description = "Enable or disable the istio module"
-  type        = bool
-  default     = true
+variable "es_master_enabled" {
+  type    = bool
+  default = true
 }
 
-# OAP
+variable "es_worker_instance_count" {
+  type    = number
+  default = 3
+}

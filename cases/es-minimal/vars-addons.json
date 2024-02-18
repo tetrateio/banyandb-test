@@ -1,0 +1,4 @@
+{
+    "kube_cluster": "banyandb-stress-testing",
+    "region": "ap-northeast-3"
+}

@@ -6,4 +6,6 @@ The test projection for verifying banyandb
 
 `/infra` contains terraform scripts for creating the infrastructure for testing banyandb on AWS.
 
-`/infra/eks-es` provisions an EKS cluster with a node group and an Elasticsearch cluster. The Elasticsearch cluster is the baseline to compare with banyandb.
+`/infra/base` provisions an EKS cluster with a node group and an Elasticsearch or BanyanDB cluster.
+
+`/infra/addons` provisions additional resources such as a Istio, OAP, and Prometheus to EKS.

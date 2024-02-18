@@ -4,10 +4,6 @@ variable "es_region" {
 
 variable "es_domain_name" {
   type = string
-  validation {
-    condition     = can(regex("^[a-zA-Z][a-zA-Z0-9]*$", var.es_domain_name))
-    error_message = "The 'es_domain_name' variable must start with a letter and can only contain alphanumeric characters."
-  }
 }
 
 variable "es_version" {

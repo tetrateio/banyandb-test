@@ -1,6 +1,6 @@
 
 module "vpc" {
-  source = "../lib/networking"
+  source = "../modules/networking"
 
   region             = var.region
   vpc_name           = var.vpc_name
@@ -22,20 +22,18 @@ module "eks-management" {
   eks_k8s_version        = var.eks_k8s_version
 }
 
-data "template_file" "kubeconfig" {
-  for_each = toset(var.cluster_names)
-
-  template = file("../templates/kubeconfig.tpl")
-  vars = {
-    ca_data  = module.eks-management.clusters[each.key].certificate_authority.0.data
-    endpoint = module.eks-management.clusters[each.key].endpoint
-    name     = each.value
+locals {
+  kubeconfig = { for k in toset(var.cluster_names) : k => templatefile("../templates/kubeconfig.tpl", {
+    ca_data  = module.eks-management.clusters[k].certificate_authority.0.data
+    endpoint = module.eks-management.clusters[k].endpoint
+    name     = k
     region   = var.region
-  }
+  }) }
 }
+
 resource "local_file" "kubeconfig_files" {
   for_each = toset(var.cluster_names)
-  content  = data.template_file.kubeconfig[each.value].rendered
+  content  = local.kubeconfig[each.value].rendered
   filename = "${pathexpand(var.kube_config_output_dir)}/config-${each.value}.yaml"
   depends_on = [
     module.eks-management.clusters
@@ -43,36 +41,16 @@ resource "local_file" "kubeconfig_files" {
 }
 
 module "es" {
+  count  = var.es_enabled ? 1 : 0
   source = "../modules/elasticsearch_public"
 
   es_region      = var.region
-  es_domain_name = "es-${var.region}-test}"
+  es_domain_name = "es-${var.region}-test"
   es_version     = var.es_version
   es_username    = var.es_username
   es_password    = var.es_password
 }
 
-
-module "istio" {
-  for_each         = var.enable_istio ? toset(var.cluster_names) : toset([])
-  source           = "../modules/istio"
-  kube_config_path = "${pathexpand(var.kube_config_output_dir)}/config-${each.value}.yaml"
-  oap_endpoint     = "${module.oap.helm_release[each.value].skywalking.name}-skywalking-helm-oap.${module.oap.helm_release[each.value].skywalking.namespace}:11800"
-
-  depends_on = [resource.local_file.kubeconfig_files]
-}
-
-module "oap" {
-  for_each               = toset(var.cluster_names)
-  source                 = "../modules/oap"
-  kube_config_path       = "${pathexpand(var.kube_config_output_dir)}/config-${each.value}.yaml"
-  storage_type           = "elasticsearch"
-  elasticsearch_host     = module.es.es_address
-  elasticsearch_user     = module.es.es_username
-  elasticsearch_password = module.es.es_password
-
-  depends_on = [resource.local_file.kubeconfig_files, module.mp_es.es_address]
-}
 
 output "instructions" {
   value = <<EOT
@@ -90,4 +68,13 @@ output "instructions" {
 
   EOT
 
+}
+
+output "elasticsearch_info" {
+  description = "Information to connect to Elasticsearch"
+  value = {
+    es_endpoint = length(module.es) > 0 ? module.es[0].es_address : null
+    es_username = var.es_username
+    es_password = var.es_password
+  }
 }
