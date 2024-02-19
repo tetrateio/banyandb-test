@@ -9,3 +9,20 @@ The test projection for verifying banyandb
 `/infra/base` provisions an EKS cluster with a node group and an Elasticsearch or BanyanDB cluster.
 
 `/infra/addons` provisions additional resources such as a Istio, OAP, and Prometheus to EKS.
+
+## Test Cases
+
+### Test Case 1: Minimal single Elasticsearch node
+
+`cases/es-minimal` contains a minimal test case for a single Elasticsearch node.
+
+#### Provisioning EKS and Elasticsearch
+
+```bash
+# Plan the infrastructure
+make -C cases/es-minimal base-plan
+# Deploy the infrastructure
+make -C cases/es-minimal base-deploy
+# Undeploy the infrastructure
+make -C cases/es-minimal base-undeploy
+```

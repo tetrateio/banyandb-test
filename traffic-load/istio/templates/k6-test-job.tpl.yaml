@@ -1,0 +1,46 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ${NAME}
+  namespace: ${NAMESPACE}
+  labels:
+    app: ${NAME}
+    type: k6-test
+spec:
+  backoffLimit: 0
+  parallelism: ${PARALLELISM}
+  completions: ${PARALLELISM}
+  template:
+    metadata: {}
+    spec:
+      containers:
+        - name: k6
+          image: loadimpact/k6:latest
+          args: ["run", "/scripts/istio.js"]
+          env:
+            - name: DURATION_INITIAL
+              value: ${DURATION_INITIAL}
+            - name: DURATION_TARGET
+              value: ${DURATION_TARGET}
+            - name: INITIAL_VUS
+              value: "${INITIAL_VUS}"
+            - name: TARGET_VUS
+              value: "${TARGET_VUS}"
+            - name: API_URL
+              value: ${API_URL}
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+            requests:
+              cpu: "500m"
+              memory: "64Mi"
+          volumeMounts:
+            - name: k6-test-script
+              mountPath: "/scripts"
+      restartPolicy: Never
+      volumes:
+        - name: k6-test-script
+          configMap:
+            name: ${CONFIG_MAP_NAME}

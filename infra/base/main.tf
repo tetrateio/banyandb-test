@@ -33,7 +33,7 @@ locals {
 
 resource "local_file" "kubeconfig_files" {
   for_each = toset(var.cluster_names)
-  content  = local.kubeconfig[each.value].rendered
+  content  = local.kubeconfig[each.value]
   filename = "${pathexpand(var.kube_config_output_dir)}/config-${each.value}.yaml"
   depends_on = [
     module.eks-management.clusters
@@ -44,11 +44,13 @@ module "es" {
   count  = var.es_enabled ? 1 : 0
   source = "../modules/elasticsearch_public"
 
-  es_region      = var.region
-  es_domain_name = "es-${var.region}-test"
-  es_version     = var.es_version
-  es_username    = var.es_username
-  es_password    = var.es_password
+  es_region         = var.region
+  es_domain_name    = "es-${var.region}-test"
+  es_version        = var.es_version
+  es_username       = var.es_username
+  es_password       = var.es_password
+  es_master_enabled = var.es_master_enabled
+  es_instance_count = var.es_worker_instance_count
 }
 
 

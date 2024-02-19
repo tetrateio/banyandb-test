@@ -31,10 +31,10 @@ resource "aws_elasticsearch_domain" "es" {
     dedicated_master_count   = var.es_master_count
     instance_count           = var.es_instance_count
     instance_type            = var.es_instance_type
-    zone_awareness_enabled   = true
+    zone_awareness_enabled   = var.es_master_enabled && var.es_instance_count > 1
 
     zone_awareness_config {
-      availability_zone_count = var.es_instance_count
+      availability_zone_count = 3
     }
   }
 

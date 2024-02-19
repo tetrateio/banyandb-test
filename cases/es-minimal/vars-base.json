@@ -3,6 +3,9 @@
         "banyandb-stress-testing"
     ],
     "region": "ap-northeast-3",
+    "worker_instance_types" : ["m5.xlarge"],
+    "eks_k8s_version": "1.28",
     "es_enabled": true,
-    "eks_k8s_version": "1.28"
+    "es_master_enabled": false,
+    "es_worker_instance_count": 1
 }

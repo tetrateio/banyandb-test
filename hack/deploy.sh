@@ -2,6 +2,8 @@
 
 set -eu -o pipefail
 
+filename=${1:-vars.json}
+
 # Do the Terraform deploy
 # Retry for delays in namespace and CRD creation
 max_retry=10
@@ -15,7 +17,7 @@ eval "$( command rapture shell-init )"
 rapture assume tetrate-skywalking-dev/admin
 rapture refresh
 
-until terraform apply -auto-approve -var-file vars.json
+until terraform apply -auto-approve -var-file $filename
 do
    sleep 10
    echo "Attempt #$counter"; date
