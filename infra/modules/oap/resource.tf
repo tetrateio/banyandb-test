@@ -20,10 +20,11 @@ resource "local_file" "helm_values" {
 
 resource "helm_release" "skywalking" {
   name      = "skywalking"
-  chart     = "oci://ghcr.io/apache/skywalking-kubernetes/skywalking-helm"
-  version   = "0.0.0-aa2c3e195f9c2d49549bea7ae592166e7b496da6"
+  chart     = "oci://registry-1.docker.io/apache/skywalking-helm"
+  version   = "4.5.0"
   namespace = kubernetes_namespace.sw_system.metadata[0].name
   values    = [local.helm_values]
+  wait      = false
 }
 
 output "oap_endpoint" {

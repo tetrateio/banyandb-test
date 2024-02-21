@@ -4,7 +4,7 @@ module "oap" {
   storage_type           = var.storage_type
   elasticsearch_host     = var.elasticsearch_host
   elasticsearch_user     = var.elasticsearch_user
-  elasticsearch_password = var.elasticsearch_host
+  elasticsearch_password = var.elasticsearch_password
   providers = {
     kubernetes = kubernetes
     helm       = helm

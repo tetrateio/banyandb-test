@@ -26,3 +26,14 @@ make -C cases/es-minimal base-deploy
 # Undeploy the infrastructure
 make -C cases/es-minimal base-undeploy
 ```
+
+#### Deploy Addons
+
+```bash
+# Plan the addons
+make -C cases/es-minimal addons-plan
+# Deploy the addons
+make -C cases/es-minimal addons-deploy
+# Undeploy the addons
+make -C cases/es-minimal addons-undeploy
+```

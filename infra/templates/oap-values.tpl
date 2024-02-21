@@ -1,5 +1,6 @@
+---
 elasticsearch:
-  enabled : false
+  enabled: false
   config:
     host: ${elasticsearch_host}
     port:
@@ -11,9 +12,10 @@ oap:
   replicas: 1
   image:
     repository: ghcr.io/apache/skywalking/oap
-    tag: a688500fb45973d3dec369b5eecf843489f56094
+    tag: a471b85ac2648d4a93ec4e853e4ee101324cf1bd
   storageType: ${storage_type}
   env:
+    SW_STORAGE_ES_HTTP_PROTOCOL: https
     SW_TELEMETRY: prometheus
     SW_ENVOY_METRIC_ALS_HTTP_ANALYSIS: mx-mesh,k8s-mesh
     SW_ENVOY_METRIC_ALS_TCP_ANALYSIS: mx-mesh,k8s-mesh
@@ -26,4 +28,4 @@ oap:
 ui:
   image:
     repository: ghcr.io/apache/skywalking/ui
-    tag: a688500fb45973d3dec369b5eecf843489f56094
+    tag: a471b85ac2648d4a93ec4e853e4ee101324cf1bd
