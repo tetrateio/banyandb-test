@@ -28,3 +28,36 @@ module "monitoring" {
     helm       = helm
   }
 }
+
+resource "aws_eks_addon" "cloudwatch" {
+  addon_name           = "amazon-cloudwatch-observability"
+  cluster_name         = var.kube_cluster
+  configuration_values = "{ \"containerLogs\": { \"enabled\": false } }"
+}
+
+resource "aws_eks_addon" "ebs_csi_driver" {
+  addon_name   = "aws-ebs-csi-driver"
+  cluster_name = var.kube_cluster
+}
+
+resource "aws_eks_addon" "vpc_cni" {
+  addon_name   = "vpc-cni"
+  cluster_name = var.kube_cluster
+}
+
+resource "aws_eks_addon" "kube-proxy" {
+  addon_name   = "kube-proxy"
+  cluster_name = var.kube_cluster
+}
+
+resource "aws_eks_addon" "coredns" {
+  addon_name   = "coredns"
+  cluster_name = var.kube_cluster
+}
+
+resource "helm_release" "metrics_server" {
+  name       = "metrics-server"
+  repository = "https://kubernetes-sigs.github.io/metrics-server/"
+  chart      = "metrics-server"
+  namespace  = "kube-system"
+}

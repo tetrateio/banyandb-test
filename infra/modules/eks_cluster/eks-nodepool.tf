@@ -21,8 +21,6 @@ EOF
 }
 
 
-# TODO(denis): scope these down as default policies are almost always too permissive
-
 resource "aws_iam_role_policy_attachment" "AmazonEKSWorkerNodePolicy" {
   for_each   = toset(var.cluster_names)
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
@@ -41,6 +39,17 @@ resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly" {
   role       = aws_iam_role.eks-node-group-role[each.value].name
 }
 
+resource "aws_iam_role_policy_attachment" "CloudWatchAgentServerPolicy" {
+  for_each   = toset(var.cluster_names)
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+  role       = aws_iam_role.eks-node-group-role[each.value].name
+}
+
+resource "aws_iam_role_policy_attachment" "AWSXrayWriteOnlyAccess" {
+  for_each   = toset(var.cluster_names)
+  policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
+  role       = aws_iam_role.eks-node-group-role[each.value].name
+}
 
 # Node groups for the passed clusters
 # Maybe make at least the size tunable on a per-cluster basis?
