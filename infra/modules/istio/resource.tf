@@ -29,6 +29,22 @@ resource "helm_release" "istiod" {
     name  = "meshConfig.enableEnvoyAccessLogService"
     value = true
   }
+  set {
+    name  = "global.proxy.resources.requests.cpu"
+    value = "5m"
+  }
+  set {
+    name  = "global.proxy.resources.requests.memory"
+    value = "16Mi"
+  }
+  set {
+    name  = "global.proxy.resources.limits.cpu"
+    value = "2000m"
+  }
+  set {
+    name  = "global.proxy.resources.limits.memory"
+    value = "1024Mi"
+  }
 }
 
 resource "helm_release" "istio_ingress" {

@@ -23,12 +23,12 @@ locals {
       DURATION_TARGET  = var.k6_duration_target
       INITIAL_VUS      = var.k6_vus_initial
       TARGET_VUS       = var.k6_vus_target
-      API_URL          = "http://service0-group${i}.test:9999"
+      API_URL          = "http://service0-group${i}-${var.kube_cluster}.test:9999"
     })
   }
 }
 
-resource "kubectl_manifest" "k6_test" {
-  for_each  = local.job_templates
-  yaml_body = each.value
+resource "kubernetes_manifest" "k6_test" {
+  for_each = local.job_templates
+  manifest = yamldecode(each.value)
 }

@@ -3,8 +3,10 @@
         "banyandb-stress-testing"
     ],
     "region": "ap-northeast-3",
-    "worker_instance_types" : ["m5.xlarge"],
-    "eks_k8s_version": "1.28",
+    "worker_instance_types" : ["r6i.8xlarge"],
+    "node_pool_desired_size": 10,
+    "node_pool_max_size": 10,
+    "eks_k8s_version": "1.29",
     "es_enabled": true,
     "es_master_enabled": false,
     "es_worker_instance_count": 1

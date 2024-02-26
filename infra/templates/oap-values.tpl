@@ -24,6 +24,14 @@ oap:
       enabled: true
   ports:
     http-monitoring: 1234
+  javaOpts: -Xmx16g -Xms16g
+  resources:
+    requests:
+      cpu: 10
+      memory: 18Gi
+    limit:
+      cpu: 12
+      memory: 20Gi
 
 ui:
   image:

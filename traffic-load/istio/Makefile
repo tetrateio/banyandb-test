@@ -1,0 +1,2 @@
+
+include ../../hack/load.mk

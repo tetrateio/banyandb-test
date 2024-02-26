@@ -34,7 +34,7 @@ variable "services_replicas" {
 
 ## k6
 variable "k6_parallelism" {
-  default = 4
+  default = 1
 }
 
 variable "k6_duration_initial" {
@@ -42,13 +42,13 @@ variable "k6_duration_initial" {
 }
 
 variable "k6_duration_target" {
-  default = "1h"
+  default = "3h"
 }
 
 variable "k6_vus_initial" {
-  default = 4
+  default = 1
 }
 
 variable "k6_vus_target" {
-  default = 32
+  default = 4
 }

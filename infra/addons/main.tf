@@ -29,12 +29,6 @@ module "monitoring" {
   }
 }
 
-resource "aws_eks_addon" "cloudwatch" {
-  addon_name           = "amazon-cloudwatch-observability"
-  cluster_name         = var.kube_cluster
-  configuration_values = "{ \"containerLogs\": { \"enabled\": false } }"
-}
-
 resource "aws_eks_addon" "ebs_csi_driver" {
   addon_name   = "aws-ebs-csi-driver"
   cluster_name = var.kube_cluster
