@@ -42,3 +42,33 @@ func Execute(exp, svc, instance string) (time.Duration, error) {
 	return elapsed, nil
 
 }
+
+func SortMetrics(name, svc string, limit int, order api.Order) (time.Duration, error) {
+	fs := flag.NewFlagSet("", flag.PanicOnError)
+	fs.String("base-url", "http://localhost:12800/graphql", "")
+	ctx := cli.NewContext(cli.NewApp(), fs, nil)
+	duration := api.Duration{
+		Start: time.Now().Add(-30 * time.Minute).Format(utils.StepFormats[api.StepMinute]),
+		End:   time.Now().Format(utils.StepFormats[api.StepMinute]),
+		Step:  api.StepMinute,
+	}
+	scope := api.ScopeServiceInstance
+	cond := api.TopNCondition{
+		Name:          name,
+		ParentService: &svc,
+		Normal:        &isNormal,
+		Scope:         &scope,
+		TopN:          limit,
+		Order:         order,
+	}
+	start := time.Now()
+	result, err := metrics.SortMetrics(ctx, cond, duration)
+	elapsed := time.Since(start)
+	if err != nil {
+		return 0, err
+	}
+	if len(result) < 1 {
+		return 0, fmt.Errorf("no result")
+	}
+	return elapsed, nil
+}

@@ -14,3 +14,6 @@ root_dir := $(abspath $(mk_dir)/../..)
 
 %-try %-up %-down %-wipe:
 	TF_VAR_kube_cluster=$* make -C $(root_dir)/traffic-load/istio $(subst $*-,, $@) $(mk_dir)vars-istio.json
+
+query-test:
+	go test -tags prometheus -timeout 60m  github.com/hanahmily/banyandb-stress-test-aws/cases/es-minimal

@@ -48,9 +48,13 @@ func Analyze(metricNames []string, rootPath string) {
 
 	for i, record := range transposed {
 		// Convert the records to a slice of floats for analysis.
-		data := make([]float64, len(record))
-		for j, r := range record {
-			data[j] = atof(r) // Convert the string to a float.
+		data := make([]float64, 0, len(record))
+		for _, r := range record {
+			d := atof(r) // Convert the string to a float.
+			if d < 0 {
+				continue
+			}
+			data = append(data, d)
 		}
 
 		// Calculate the statistics.

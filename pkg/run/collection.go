@@ -24,6 +24,7 @@ func Collect(rootPath string, scrape Scrape, interval time.Duration, closeCh <-c
 	if err = file.Truncate(0); err != nil {
 		panic(err)
 	}
+	lastCollectTime := time.Now()
 	for {
 		metrics, err := scrape()
 		if err != nil {
@@ -41,6 +42,15 @@ func Collect(rootPath string, scrape Scrape, interval time.Duration, closeCh <-c
 			return
 		default:
 		}
+		if time.Since(lastCollectTime) < time.Minute {
+			select {
+			case <-closeCh:
+				return
+			case <-time.After(interval):
+			}
+			continue
+		}
+		lastCollectTime = time.Now()
 
 		err = writeMetrics(file, metrics)
 		if err != nil {

@@ -1,0 +1,11 @@
+Metric Name, Min, Max, Mean, Median, P95
+service_instance_resp_time-0, 0.043466, 0.228283, 0.092942, 0.082427, 0.171044
+service_instance_resp_time-1, 0.043930, 0.195493, 0.096107, 0.093980, 0.168494
+service_instance_resp_time-2, 0.041461, 0.204117, 0.099911, 0.089893, 0.193014
+service_instance_resp_time-3, 0.045729, 0.182485, 0.087296, 0.080530, 0.165152
+service_instance_resp_time-4, 0.040729, 0.188907, 0.088221, 0.080584, 0.156290
+service_instance_cpm-0, 0.046033, 0.189617, 0.092578, 0.089397, 0.154502
+service_instance_cpm-1, 0.038080, 0.174041, 0.091888, 0.083757, 0.166540
+service_instance_cpm-2, 0.043797, 0.193360, 0.087364, 0.078192, 0.150159
+service_instance_cpm-3, 0.045684, 0.190518, 0.087380, 0.086553, 0.161872
+service_instance_cpm-4, 0.028208, 0.195145, 0.088606, 0.080678, 0.148139

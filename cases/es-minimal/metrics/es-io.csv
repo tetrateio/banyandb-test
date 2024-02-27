@@ -1,0 +1,31 @@
+data:text/csv;charset=utf-8,Id,m3,m4,m5,m6,m8,m10
+StatusCode,Complete,Complete,Complete,Complete,Complete,Complete
+Messages,,,,,,
+Full label,ap-northeast-3:AWS/ES ClientId:194797381117 DomainName:es-ap-northeast-3-test ReadIOPS Minimum 60,ap-northeast-3:AWS/ES ClientId:194797381117 DomainName:es-ap-northeast-3-test ReadThroughput Minimum 60,ap-northeast-3:AWS/ES ClientId:194797381117 DomainName:es-ap-northeast-3-test WriteLatency Minimum 60,ap-northeast-3:AWS/ES ClientId:194797381117 DomainName:es-ap-northeast-3-test WriteThroughput Average 60,ap-northeast-3:AWS/ES ClientId:194797381117 DomainName:es-ap-northeast-3-test DiskQueueDepth Average 60,ap-northeast-3:AWS/ES ClientId:194797381117 DomainName:es-ap-northeast-3-test WriteIOPS Average 60
+Label,ReadIOPS,ReadThroughput,WriteLatency,WriteThroughput,DiskQueueDepth,WriteIOPS
+2024/02/27 06:10:00,0,0,0.0027377315972222215,1383355.7333333334,0.0259765625,9.6
+2024/02/27 06:11:00,,,,,,
+2024/02/27 06:12:00,,,,,,
+2024/02/27 06:13:00,,,,,,
+2024/02/27 06:14:00,,,,,,
+2024/02/27 06:15:00,0,0,0.0034059040307101726,1212443.3066666666,0.02890625,8.683333333333334
+2024/02/27 06:16:00,,,,,,
+2024/02/27 06:17:00,,,,,,
+2024/02/27 06:18:00,,,,,,
+2024/02/27 06:19:00,,,,,,
+2024/02/27 06:20:00,0,0,0.0030759079242861725,1651234.1333333333,0.031640625,10.39
+2024/02/27 06:21:00,,,,,,
+2024/02/27 06:22:00,,,,,,
+2024/02/27 06:23:00,,,,,,
+2024/02/27 06:24:00,,,,,,
+2024/02/27 06:25:00,0,0,0.003001850866586054,1223857.4933333334,0.02421875,8.27
+2024/02/27 06:26:00,,,,,,
+2024/02/27 06:27:00,,,,,,
+2024/02/27 06:28:00,,,,,,
+2024/02/27 06:29:00,,,,,,
+2024/02/27 06:30:00,0,0,0.0026669573076923076,1196386.9866666666,0.0224609375,8.666666666666666
+2024/02/27 06:31:00,,,,,,
+2024/02/27 06:32:00,,,,,,
+2024/02/27 06:33:00,,,,,,
+2024/02/27 06:34:00,,,,,,
+2024/02/27 06:35:00,0,0,0.002986899470899471,1214969.1733333333,0.0240234375,8.19
