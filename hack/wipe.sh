@@ -10,7 +10,7 @@ eval "$( command rapture shell-init )"
 rapture assume tetrate-skywalking-dev/admin
 rapture refresh
 
-export KUBECONFIG=~/.kube/config-$(jq -r '.kube_cluster' $filename).yaml
+export KUBECONFIG=~/.kube/config-${TF_VAR_kube_cluster}.yaml
 
 kubectl -n sw-system scale --replicas 0 deployment skywalking-skywalking-helm-oap
 

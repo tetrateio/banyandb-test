@@ -3,6 +3,9 @@
 format: install
 	@find . -name "*.tf" -exec terraform fmt {} \;
 	@find . -name "*.yaml" -exec yamllint -d "{extends: default, rules: {line-length: {max: 120}}}" {} \;
+	go mod tidy
+	go fmt ./...
+	go vet ./...
 
 .PHONY: install
 install:
