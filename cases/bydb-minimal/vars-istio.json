@@ -1,0 +1,6 @@
+{
+    "region": "ap-northeast-3",
+    "service_group_count": 12,
+    "services_count": 4,
+    "services_default_replicas": 8
+}

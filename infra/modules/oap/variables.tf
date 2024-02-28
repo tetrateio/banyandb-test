@@ -18,3 +18,8 @@ variable "elasticsearch_password" {
   type    = string
   default = ""
 }
+
+variable "banyandb_host" {
+  type    = string
+  default = ""
+}

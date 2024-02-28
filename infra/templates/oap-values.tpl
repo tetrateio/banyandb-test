@@ -19,6 +19,7 @@ oap:
     SW_TELEMETRY: prometheus
     SW_ENVOY_METRIC_ALS_HTTP_ANALYSIS: mx-mesh,k8s-mesh
     SW_ENVOY_METRIC_ALS_TCP_ANALYSIS: mx-mesh,k8s-mesh
+    SW_STORAGE_BANYANDB_HOST: ${banyandb_host}
   envoy:
     als:
       enabled: true

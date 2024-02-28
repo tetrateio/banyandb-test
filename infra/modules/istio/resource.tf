@@ -31,11 +31,11 @@ resource "helm_release" "istiod" {
   }
   set {
     name  = "global.proxy.resources.requests.cpu"
-    value = "5m"
+    value = "100m"
   }
   set {
     name  = "global.proxy.resources.requests.memory"
-    value = "16Mi"
+    value = "128Mi"
   }
   set {
     name  = "global.proxy.resources.limits.cpu"

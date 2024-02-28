@@ -1,10 +1,20 @@
 
+module "banyandb" {
+  count  = var.storage_type == "banyandb" ? 1 : 0
+  source = "../modules/banyandb"
+  providers = {
+    kubernetes = kubernetes
+    helm       = helm
+  }
+}
+
 module "oap" {
   source                 = "../modules/oap"
   storage_type           = var.storage_type
   elasticsearch_host     = var.elasticsearch_host
   elasticsearch_user     = var.elasticsearch_user
   elasticsearch_password = var.elasticsearch_password
+  banyandb_host          = length(module.banyandb) > 0 ? module.banyandb[0].banyandb_host : null
   providers = {
     kubernetes = kubernetes
     helm       = helm

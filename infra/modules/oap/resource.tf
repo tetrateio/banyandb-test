@@ -10,6 +10,7 @@ locals {
     elasticsearch_host     = var.elasticsearch_host
     elasticsearch_user     = var.elasticsearch_user
     elasticsearch_password = var.elasticsearch_password
+    banyandb_host          = var.banyandb_host
   })
 }
 
