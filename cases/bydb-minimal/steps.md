@@ -15,6 +15,12 @@ make -C cases/bydb-minimal base-undeploy
 
 A EKS cluster named "c1" will be created. A Elasticsearch cluster will be created as well.
 
+Install metric server
+
+```bash
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/high-availability-1.21+.yaml
+```
+
 ## Install Addons
 
 Install the addons for the EKS cluster.
@@ -29,8 +35,8 @@ make -C cases/bydb-minimal c1-uninstall
 ## Up Traffic Loads
 
 ```bash
-# Wipe the existing indices in Elasticsearch
-make -C cases/bydb-minimal c1-wipe
+# Restart banyandb to clean up all data on the disk
+make -C cases/bydb-minimal c1-clean
 
 # Up the traffic loads
 make -C cases/bydb-minimal c1-up

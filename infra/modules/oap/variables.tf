@@ -19,7 +19,7 @@ variable "elasticsearch_password" {
   default = ""
 }
 
-variable "banyandb_host" {
+variable "banyandb_targets" {
   type    = string
   default = ""
 }

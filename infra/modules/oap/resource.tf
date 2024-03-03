@@ -2,6 +2,9 @@ resource "kubernetes_namespace" "sw_system" {
   metadata {
     name = "sw-system"
   }
+  lifecycle {
+    ignore_changes = [metadata]
+  }
 }
 
 locals {
@@ -10,7 +13,7 @@ locals {
     elasticsearch_host     = var.elasticsearch_host
     elasticsearch_user     = var.elasticsearch_user
     elasticsearch_password = var.elasticsearch_password
-    banyandb_host          = var.banyandb_host
+    banyandb_targets       = var.banyandb_targets
   })
 }
 

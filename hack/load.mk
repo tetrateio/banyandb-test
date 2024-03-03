@@ -12,4 +12,7 @@ down:
 wipe:
 	@bash $(mk_dir)/wipe.sh $(ARGUMENT)
 
+clean:
+	@bash $(mk_dir)/clean.sh $(ARGUMENT)
+
 .PHONY: plan deploy undeploy

@@ -2,7 +2,7 @@
 resource "kubernetes_service" "banyand_service" {
   metadata {
     name      = "banyand"
-    namespace = kubernetes_namespace.sw_system.metadata[0].name
+    namespace = var.namespace
   }
   spec {
     selector = {
@@ -19,7 +19,7 @@ resource "kubernetes_service" "banyand_service" {
 resource "kubernetes_service" "banyand_prometheus" {
   metadata {
     name      = "banyand-prometheus"
-    namespace = kubernetes_namespace.sw_system.metadata[0].name
+    namespace = var.namespace
     labels = {
       app = "banyand-prometheus"
     }

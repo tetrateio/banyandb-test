@@ -12,8 +12,8 @@ root_dir := $(abspath $(mk_dir)/../..)
 %-uninstall:
 	TF_VAR_kube_cluster=$* make -C $(root_dir)/infra/addons undeploy $(mk_dir)vars-addons.json
 
-%-try %-up %-down %-wipe:
+%-try %-up %-down %-clean:
 	TF_VAR_kube_cluster=$* make -C $(root_dir)/traffic-load/istio $(subst $*-,, $@) $(mk_dir)vars-istio.json
 
 query-test:
-	go test -tags prometheus -timeout 60m  github.com/hanahmily/banyandb-stress-test-aws/cases/es-minimal
+	go test -tags prometheus -timeout 60m  github.com/hanahmily/banyandb-stress-test-aws/cases/bydb-minimal

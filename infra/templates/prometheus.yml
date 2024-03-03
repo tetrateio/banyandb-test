@@ -64,5 +64,5 @@ serverFiles:
           target_label: __address__
           regex: (.+)(?::\d+)
           replacement: $1:http-monitoring
-      scrape_interval: 30s
+      scrape_interval: 10s
       scrape_timeout: 10s

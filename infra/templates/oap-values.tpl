@@ -11,15 +11,16 @@ elasticsearch:
 oap:
   replicas: 1
   image:
-    repository: ghcr.io/apache/skywalking/oap
-    tag: a471b85ac2648d4a93ec4e853e4ee101324cf1bd
+    repository: hanahmily/oap
+    tag: latest
+    imagePullPolicy: Always
   storageType: ${storage_type}
   env:
     SW_STORAGE_ES_HTTP_PROTOCOL: https
     SW_TELEMETRY: prometheus
     SW_ENVOY_METRIC_ALS_HTTP_ANALYSIS: mx-mesh,k8s-mesh
     SW_ENVOY_METRIC_ALS_TCP_ANALYSIS: mx-mesh,k8s-mesh
-    SW_STORAGE_BANYANDB_HOST: ${banyandb_host}
+    SW_STORAGE_BANYANDB_TARGETS: ${banyandb_targets}
   envoy:
     als:
       enabled: true

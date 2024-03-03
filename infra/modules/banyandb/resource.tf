@@ -1,5 +1,4 @@
-resource "kubernetes_namespace" "sw_system" {
-  metadata {
-    name = "sw-system"
-  }
+
+output "banyandb_targets" {
+  value = "${kubernetes_service.banyand_service.metadata.0.name}:17912"
 }

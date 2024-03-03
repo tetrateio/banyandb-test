@@ -4,8 +4,8 @@ module "banyandb" {
   source = "../modules/banyandb"
   providers = {
     kubernetes = kubernetes
-    helm       = helm
   }
+  namespace = "sw-system"
 }
 
 module "oap" {
@@ -14,7 +14,7 @@ module "oap" {
   elasticsearch_host     = var.elasticsearch_host
   elasticsearch_user     = var.elasticsearch_user
   elasticsearch_password = var.elasticsearch_password
-  banyandb_host          = length(module.banyandb) > 0 ? module.banyandb[0].banyandb_host : null
+  banyandb_targets       = length(module.banyandb) > 0 ? module.banyandb[0].banyandb_targets : null
   providers = {
     kubernetes = kubernetes
     helm       = helm
@@ -39,9 +39,9 @@ module "monitoring" {
   }
 }
 
-resource "helm_release" "metrics_server" {
-  name       = "metrics-server"
-  repository = "https://kubernetes-sigs.github.io/metrics-server/"
-  chart      = "metrics-server"
-  namespace  = "kube-system"
+output "monitoring_dashboard" {
+  value = module.monitoring.dashboard
+}
+output "monitoring_grpc" {
+  value = module.monitoring.grpc
 }

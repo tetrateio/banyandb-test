@@ -6,5 +6,6 @@
     "worker_instance_types" : ["r6i.8xlarge"],
     "node_pool_desired_size": 7,
     "node_pool_max_size": 7,
-    "eks_k8s_version": "1.29"
+    "eks_k8s_version": "1.29",
+    "es_enabled": false
 }
