@@ -39,3 +39,21 @@ resource "kubernetes_service" "banyand_prometheus" {
     session_affinity = "ClientIP"
   }
 }
+
+resource "kubernetes_service" "banyand_service_external" {
+  metadata {
+    name      = "banyand-external"
+    namespace = var.namespace
+  }
+  spec {
+    selector = {
+      app = "banyand"
+    }
+    type = "LoadBalancer"
+    port {
+      name        = "http"
+      port        = 17913
+      target_port = 17913
+    }
+  }
+}
