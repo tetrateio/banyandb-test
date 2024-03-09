@@ -29,3 +29,10 @@ resource "aws_eks_addon" "coredns" {
   addon_name   = "coredns"
   cluster_name = each.value
 }
+
+resource "aws_eks_addon" "cloudwatch" {
+  for_each             = toset(var.cluster_names)
+  addon_name           = "amazon-cloudwatch-observability"
+  configuration_values = "{ \"containerLogs\": { \"enabled\": false } }"
+  cluster_name         = each.value
+}
