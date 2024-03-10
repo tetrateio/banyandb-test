@@ -51,6 +51,7 @@ module "es" {
   es_password       = var.es_password
   es_master_enabled = var.es_master_enabled
   es_instance_count = var.es_worker_instance_count
+  es_instance_type  = var.es_worker_instance_type
 }
 
 

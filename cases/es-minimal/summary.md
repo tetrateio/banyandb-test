@@ -49,7 +49,7 @@ Elasticsearch will use less memory when traffic is up.
 
 Disk: 50GB
     Read IOPS: 0
-    Write IOPS: 9, Throughput: 1.3MB/s, Latency: 3ms
+    Write IOPS: 9, Throughput: 1.3MB/s, Latency: 0.003ms
 
 > [IO Metrics](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-cloudwatchmetrics.html)
 

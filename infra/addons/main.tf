@@ -14,7 +14,7 @@ module "oap" {
   elasticsearch_host     = var.elasticsearch_host
   elasticsearch_user     = var.elasticsearch_user
   elasticsearch_password = var.elasticsearch_password
-  banyandb_targets       = length(module.banyandb) > 0 ? module.banyandb[0].banyandb_targets : null
+  banyandb_targets       = length(module.banyandb) > 0 ? module.banyandb[0].banyandb_targets : ""
   providers = {
     kubernetes = kubernetes
     helm       = helm

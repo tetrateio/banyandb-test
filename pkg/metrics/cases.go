@@ -1,6 +1,7 @@
 package metrics
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"path"
@@ -11,7 +12,7 @@ import (
 	"skywalking.apache.org/repo/goapi/query"
 )
 
-func ServiceList(basePath string, timeout time.Duration) {
+func ServiceList(basePath string, timeout time.Duration, svcNum int, fs *flag.FlagSet) {
 	basePath = path.Join(basePath, "svc-list")
 	err := os.MkdirAll(basePath, 0o755)
 	if err != nil {
@@ -23,11 +24,11 @@ func ServiceList(basePath string, timeout time.Duration) {
 		close(stopCh)
 	}()
 	metricNames := []string{"service_sla", "service_cpm", "service_resp_time", "service_apdex", "service_sidecar_internal_req_latency_nanos"}
-	size := len(metricNames) * 5
+	size := len(metricNames) * svcNum
 	header := make([]string, size)
 	for k, mName := range metricNames {
-		for i := 0; i < 5; i++ {
-			offset := k*5 + i
+		for i := 0; i < svcNum; i++ {
+			offset := k*svcNum + i
 			header[offset] = fmt.Sprintf("%s-%d", mName, i)
 		}
 	}
@@ -39,13 +40,13 @@ func ServiceList(basePath string, timeout time.Duration) {
 			data := make([]float64, size)
 			var wg sync.WaitGroup
 			for k, mName := range metricNames {
-				for i := 0; i < 5; i++ {
-					offset := k*5 + i
+				for i := 0; i < svcNum; i++ {
+					offset := k*svcNum + i
 					svc := fmt.Sprintf("service0-group%d-c1.test", i)
 					wg.Add(1)
 					go func(mName, svc string) {
 						defer wg.Done()
-						d, err := Execute(mName, svc, "")
+						d, err := Execute(mName, svc, "", fs)
 						if err != nil {
 							fmt.Printf("query metric %s %s error: %v \n", mName, svc, err)
 						}
@@ -61,7 +62,7 @@ func ServiceList(basePath string, timeout time.Duration) {
 	wg.Wait()
 }
 
-func TopN(basePath string, timeout time.Duration) {
+func TopN(basePath string, timeout time.Duration, svcNum int, fs *flag.FlagSet) {
 	basePath = path.Join(basePath, "topn")
 	err := os.MkdirAll(basePath, 0o755)
 	if err != nil {
@@ -73,11 +74,11 @@ func TopN(basePath string, timeout time.Duration) {
 		close(stopCh)
 	}()
 	metricNames := []string{"service_instance_resp_time", "service_instance_cpm"}
-	size := len(metricNames) * 5
+	size := len(metricNames) * svcNum
 	header := make([]string, size)
 	for k, mName := range metricNames {
-		for i := 0; i < 5; i++ {
-			offset := k*5 + i
+		for i := 0; i < svcNum; i++ {
+			offset := k*svcNum + i
 			header[offset] = fmt.Sprintf("%s-%d", mName, i)
 		}
 	}
@@ -89,13 +90,13 @@ func TopN(basePath string, timeout time.Duration) {
 			data := make([]float64, size)
 			var wg sync.WaitGroup
 			for k, mName := range metricNames {
-				for i := 0; i < 5; i++ {
-					offset := k*5 + i
+				for i := 0; i < svcNum; i++ {
+					offset := k*svcNum + i
 					svc := fmt.Sprintf("service0-group%d-c1.test", i)
 					wg.Add(1)
 					go func(mName, svc string) {
 						defer wg.Done()
-						d, err := SortMetrics(mName, svc, 5, query.OrderDes)
+						d, err := SortMetrics(mName, svc, 5, query.OrderDes, fs)
 						if err != nil {
 							data[offset] = -1
 							fmt.Printf("query metric %s %s error: %v \n", mName, svc, err)

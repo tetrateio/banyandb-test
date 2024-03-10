@@ -74,3 +74,8 @@ variable "es_worker_instance_count" {
   type    = number
   default = 3
 }
+
+variable "es_worker_instance_type" {
+  type    = string
+  default = "r6g.large.elasticsearch"
+}

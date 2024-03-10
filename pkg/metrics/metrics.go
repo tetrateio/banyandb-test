@@ -16,9 +16,8 @@ var (
 	isNormal = true
 )
 
-func Execute(exp, svc, instance string) (time.Duration, error) {
-	fs := flag.NewFlagSet("", flag.PanicOnError)
-	fs.String("base-url", "http://localhost:12800/graphql", "")
+func Execute(exp, svc, instance string, fs *flag.FlagSet) (time.Duration, error) {
+
 	ctx := cli.NewContext(cli.NewApp(), fs, nil)
 	entity := &api.Entity{
 		ServiceName:         &svc,
@@ -43,9 +42,7 @@ func Execute(exp, svc, instance string) (time.Duration, error) {
 
 }
 
-func SortMetrics(name, svc string, limit int, order api.Order) (time.Duration, error) {
-	fs := flag.NewFlagSet("", flag.PanicOnError)
-	fs.String("base-url", "http://localhost:12800/graphql", "")
+func SortMetrics(name, svc string, limit int, order api.Order, fs *flag.FlagSet) (time.Duration, error) {
 	ctx := cli.NewContext(cli.NewApp(), fs, nil)
 	duration := api.Duration{
 		Start: time.Now().Add(-30 * time.Minute).Format(utils.StepFormats[api.StepMinute]),
