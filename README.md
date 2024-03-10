@@ -16,24 +16,10 @@ The test projection for verifying banyandb
 
 `cases/es-minimal` contains a minimal test case for a single Elasticsearch node.
 
-#### Provisioning EKS and Elasticsearch
+### Test Case 2: Minimal single BanyanDB node
 
-```bash
-# Plan the infrastructure
-make -C cases/es-minimal base-plan
-# Deploy the infrastructure
-make -C cases/es-minimal base-deploy
-# Undeploy the infrastructure
-make -C cases/es-minimal base-undeploy
-```
+`cases/bydb-minimal` contains a minimal test case for a single BanyanDB node.
 
-#### Deploy Addons
+### Test Case 3: Elasticsearch cluster
 
-```bash
-# Plan the addons
-make -C cases/es-minimal addons-plan
-# Deploy the addons
-make -C cases/es-minimal addons-deploy
-# Undeploy the addons
-make -C cases/es-minimal addons-undeploy
-```
+`cases/es-cluster` contains a test case for an Elasticsearch cluster.
